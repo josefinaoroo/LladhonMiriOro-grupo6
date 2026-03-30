@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import Login from "./screens/Login/Login";
+import Home from "./screens/Home/Home";
+import Favoritos from "./screens/Favoritos/Favoritos";
+import NotFound from "./componentes/NotFound/NotFound";
+import Header from "./componentes/Header/Header";
+import Footer from "./componentes/Footer/Footer";
+
+
+//recordar login /:busqueda --> esto es para obtener la info que ingresa el usuario
+//chequear que se pone en notfound (habiamos puesto estrellita)
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <React.Fragment>
+      <Header/>
+      <Switch>
+        <Route path="/" exact= {true} component={Home}/>
+        <Route path="/login" component={Login}/> 
+        <Route path="/favoritos" component={Favoritos}/>
+        <Route path="*" component={NotFound}/>
+      </Switch>
+      <Footer/>
+    </React.Fragment>
+   </>
   );
 }
 
