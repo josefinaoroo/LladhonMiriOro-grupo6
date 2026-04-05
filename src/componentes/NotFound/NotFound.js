@@ -1,9 +1,12 @@
 import React from "react";
 
-function NotFound(){
-    return(
-        <h1>No existe.</h1>
-    )
+function NotFound() {
+  return (
+    <div>
+      <h1>404</h1>
+      <p>Página no encontrada</p>
+    </div>
+  );
 }
 
 export default NotFound;
