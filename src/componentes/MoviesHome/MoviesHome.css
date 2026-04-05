@@ -1,0 +1,80 @@
+body{
+    background-color: black;
+    color: white;
+    margin: 0;
+}
+
+main{
+    padding: 20px;
+}
+
+h1, h2{
+    color: white;
+    margin-bottom: 15px;
+}
+
+.filter-form{
+    width: 300px;
+    margin-bottom: 30px;
+}
+
+.cards{
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.single-card-movie{
+    width: 24%;
+    margin-bottom: 30px;
+    background-color: #111;
+    padding: 10px;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.card-img-top{
+    width: 100%;
+    border-radius: 4px;
+}
+
+.cardBody{
+    margin-top: 12px;
+}
+
+.card-title{
+    color: white;
+    margin-bottom: 10px;
+    min-height: 40px;
+}
+
+.card-text{
+    color: #ddd;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button{
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+
+}
+
+.btn-info{
+    display: inline-block;
+    margin-bottom: 20px;
+}
+.btn-primary{
+    margin-left: 160px;
+}
