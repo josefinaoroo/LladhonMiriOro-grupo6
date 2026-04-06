@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import "./NowPlaying.css";
 import { Link } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 
 class NowPlaying extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      datos: [],
-      valor: ""
-    };
+    datos: [],
+    valor: "",
+    loading: true
+  };
   }
 
   componentDidMount() {
@@ -22,8 +24,9 @@ class NowPlaying extends Component {
           return peli;
         })
          this.setState({
-            datos: pelidescri
-          })
+          datos: pelidescri,
+          loading: false
+        });
         
       })
       .catch(error => console.log(error));
@@ -63,8 +66,9 @@ render() {
             <Link to="/peliculas" className="btn btn-info">Ver todas</Link>
         <section className="cards" id="">
           {
-            this.state.datos.length === 0
-              ? <h3>Cargando...</h3>
+            this.state.loading
+            ? <Loader />
+  
               : peliculasFiltradas.map((elm, idx) => (
                   <article className="single-card-movie" key={idx}>
                     <img

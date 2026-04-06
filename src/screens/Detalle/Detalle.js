@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Detalle.css";
+import Loader from "../../componentes/Loader/Loader";
 
 class Detalle extends Component {
   constructor(props) {
@@ -16,11 +17,13 @@ class Detalle extends Component {
     fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=22424f1be1f9ca8ae9a2dba99019226a&language=es-ES`)
       .then(res => res.json())
       .then(data => {
+      setTimeout(() => {
         this.setState({
-          pelicula: data,
-          loading: false
-        });
-      })
+        pelicula: data,
+        loading: false
+    });
+      }, 2000);
+})
       .catch(err => console.log(err));
   }
 
@@ -44,7 +47,7 @@ class Detalle extends Component {
 
   render() {
     if (this.state.loading) {
-      return <h2>Cargando...</h2>;
+    return <Loader />;
     }
 
     let peli = this.state.pelicula;

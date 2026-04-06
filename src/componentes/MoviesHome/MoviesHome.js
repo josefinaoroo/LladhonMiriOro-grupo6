@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./MoviesHome.css";
 import { Link } from "react-router-dom";
-
+import Loader from "../Loader/Loader";
 
 class MoviesHome extends Component {
   constructor(props) {
@@ -16,16 +16,23 @@ class MoviesHome extends Component {
     fetch("https://api.themoviedb.org/3/movie/popular?api_key=22424f1be1f9ca8ae9a2dba99019226a&language=es-ES")
       .then(response => response.json())
       .then(data => {
-        let peliculas = data.results.slice(0,4);
-        let pelidescri= peliculas.map(function(peli){
-          peli.verdescripcion= false;
-          return peli;
-        })
-         this.setState({
-            datos: pelidescri
-          })
+          setTimeout(() => {
+
+            let peliculas = data.results.slice(0,4);
+
+            let pelidescri = peliculas.map(function(peli){
+            peli.verdescripcion = false;
+            return peli;
+       });
+
+        this.setState({
+        datos: pelidescri
+      });
+
+        }, 2000);
+})
         
-      })
+    
       .catch(error => console.log(error));
   }
 
@@ -64,7 +71,7 @@ render() {
         <section className="cards" id="">
           {
             this.state.datos.length === 0
-              ? <h3>Cargando...</h3>
+              ? <Loader />
               : peliculasFiltradas.map((elm, idx) => (
                   <article className="single-card-movie" key={idx}>
                     <img
