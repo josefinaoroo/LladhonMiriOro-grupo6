@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import "./MoviesHome.css"
+import "./MoviesHome.css";
+import { Link } from "react-router-dom";
+
 
 class MoviesHome extends Component {
   constructor(props) {
@@ -58,8 +60,7 @@ render() {
       <>
         <h2 className="alert alert-primary">Películas más populares</h2>
 
-        <a href="/movies" className="btn btn-info">Ver todas</a>
-
+          <Link to="/peliculas" className="btn btn-info">Ver todas</Link>
         <section className="cards" id="">
           {
             this.state.datos.length === 0
@@ -80,9 +81,9 @@ render() {
 
                       {elm.verdescripcion ? <p className="card-text">{elm.overview}</p> : null}
 
-                      <a href={`movie.html?id=${elm.id}`} className="btn btn-primary">
+                      <Link to={`/detalle/${elm.id}`} className="btn btn-primary">
                         Ir a detalle
-                      </a>
+                      </Link>
                     </div>
                   </article>
                 ))

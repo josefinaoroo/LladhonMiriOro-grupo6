@@ -7,6 +7,7 @@ import NotFound from "./componentes/NotFound/NotFound";
 import Header from "./componentes/Header/Header";
 import Footer from "./componentes/Footer/Footer";
 import CrearCuenta from "./screens/CrearCuenta/CrearCuenta";
+import Detalle from "./screens/Detalle/Detalle";
 
 //recordar login /:busqueda --> esto es para obtener la info que ingresa el usuario
 //chequear que se pone en notfound (habiamos puesto estrellita)
@@ -21,7 +22,9 @@ function App() {
         <Route path="/login" component={Login}/> 
         <Route path="/favoritos" component={Favoritos}/>
         <Route path="/crearcuenta" component={CrearCuenta}/>
+        <Route path="/detalle/:id" component={Detalle} />
         <Route component={NotFound}/>
+
       </Switch>
       <Footer/>
     </React.Fragment>
