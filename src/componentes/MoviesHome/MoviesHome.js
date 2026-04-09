@@ -8,28 +8,35 @@ class MoviesHome extends Component {
     super(props);
     this.state = {
       datos: [],
-      valor: ""
+      valor: "",
+      loading: true,
     };
   }
-
+  //esto reenderiza cuando se monta la pagina
+  //fetch: trae info API y desestructura apenas de abre todo lo de la API
+  //DidUpdate: cuando hay un update en un componente --> no refresa todo, sino el componente
+  //slice --> agarra de la API 4 peliculas 
+  //pelidescri --> realiza un map de las peliculas que me trajo 
   componentDidMount() {
-    fetch("https://api.themoviedb.org/3/movie/popular?api_key=22424f1be1f9ca8ae9a2dba99019226a&language=es-ES")
+    fetch("https://api.themoviedb.org/3/movie/popular?api_key=22424f1be1f9ca8ae9a2dba99019226a&language=es-ES") 
       .then(response => response.json())
       .then(data => {
-          setTimeout(() => {
+          this.setState(() => {
 
             let peliculas = data.results.slice(0,4);
-
+            //le agregamos al array el atributo verdescripcion con valor false 
             let pelidescri = peliculas.map(function(peli){
             peli.verdescripcion = false;
-            return peli;
-       });
-
+            return peli
+            
+        });
+        
         this.setState({
-        datos: pelidescri
-      });
+            datos: pelidescri,
+            loading: false
+        });
 
-        }, 2000);
+        },);
 })
         
     
@@ -45,6 +52,8 @@ class MoviesHome extends Component {
       valor: event.target.value
     });
   }
+//como parametro --> id. a esa propia id nos fijamos el valor que tiene verdescripcion (atributo que agregamos arriba)
+//compara el id y cambia el valor que tiene verdescripcion --> asi trabaja las tarjetas de manera autonoma
   verDescripcion(id){
     let peliculasModificadas = this.state.datos.map(function(peli){
       if (peli.id === id){
