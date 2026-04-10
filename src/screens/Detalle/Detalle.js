@@ -17,12 +17,12 @@ class Detalle extends Component {
     fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=22424f1be1f9ca8ae9a2dba99019226a&language=es-ES`)
       .then(res => res.json())
       .then(data => {
-      this.setState(() => {
+      
         this.setState({
         pelicula: data,
         loading: false
     });
-      },);
+
 })
       .catch(err => console.log(err));
   }
