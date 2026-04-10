@@ -13,12 +13,12 @@ class CrearCuenta extends Component {
   enviarFormulario(event) {
     event.preventDefault();
 
-    let usuarios = localStorage.getItem("usuarios");
+    let usuarios = localStorage.getItem("usuarios"); 
 
     if (usuarios === null) {
     usuarios = [];
     } else {
-    usuarios = JSON.parse(usuarios);
+    usuarios = JSON.parse(usuarios); //si hay --> lo convierte en un array
     }
 
     // para la validación de la contraseña
@@ -31,7 +31,7 @@ class CrearCuenta extends Component {
     // validación del email repetido
     let existe = false;
 
-    for (let i = 0; i < usuarios.length; i++) {
+    for (let i = 0; i < usuarios.length; i++) { 
     if (usuarios[i].email === this.state.email) {
         existe = true;
     }
@@ -96,7 +96,7 @@ class CrearCuenta extends Component {
 
         <button type="submit">Crear cuenta</button>
 
-        {this.state.error !== "" && <p>{this.state.error}</p>}
+        {this.state.error !== "" ? <p>{this.state.error}</p> : ""}
       </form>
     );
   }
