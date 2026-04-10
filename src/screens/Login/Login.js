@@ -13,14 +13,14 @@ class Login extends Component {
   enviarFormulario(e) { //se ejecuta cuando el usuario manda el formulario
     e.preventDefault(); // evita que la página se recargue al tocar el botón submit
 
-    let usuarios = localStorage.getItem("usuarios"); //se guardan los usuarios que se guardaron desde CrearCuenta
-
+    let usuarios = localStorage.getItem("usuarios"); //lee del navegador los usuarios que se guardaron desde CrearCuenta
+// si no hay usuario muestra error
     if (usuarios === null) {
       return this.setState({
         error: "Credenciales incorrectas"
       });
     }
-
+// convierte usuario a array real porque LS lo devuelve como string
     usuarios = JSON.parse(usuarios); 
 
     let usuarioEncontrado = null;
@@ -41,7 +41,7 @@ class Login extends Component {
         JSON.stringify(usuarioEncontrado)
       );
 
-      // redirigir al home
+      // redirigir al home --> history.push para navegar 
       this.props.history.push("/");
     } else {
       this.setState({

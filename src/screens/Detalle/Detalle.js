@@ -29,7 +29,8 @@ class Detalle extends Component {
 
   agregarFavorito() {
     let favoritos = localStorage.getItem("favoritos");
-
+//si no guarda nada --> crea un array vacio
+//si hay algo convierte el texto guardado de nuevo en un array
     if (favoritos === null) {
       favoritos = [];
     } else {
@@ -37,7 +38,9 @@ class Detalle extends Component {
     }
 
     let id = this.state.pelicula.id;
-
+// verifica que el id no este repetido
+// si no esta lo agrega con push --> agrega id al final del array
+// lo vuelve a guardar en LS
     if (!favoritos.includes(id)) {
       favoritos.push(id);
       localStorage.setItem("favoritos", JSON.stringify(favoritos));
@@ -68,6 +71,7 @@ class Detalle extends Component {
         <p><strong>Sinopsis:</strong> {peli.overview}</p>
 
         {/* SOLO SI ESTÁ LOGUEADO */}
+        {/*si existe muestra el boton agregar fav sino, no muestra nada*/}
         {localStorage.getItem("usuarioLogueado") && (
           <button onClick={() => this.agregarFavorito()}>
             Agregar a favoritos
