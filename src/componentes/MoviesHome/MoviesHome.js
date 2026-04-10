@@ -21,7 +21,7 @@ class MoviesHome extends Component {
     fetch("https://api.themoviedb.org/3/movie/popular?api_key=22424f1be1f9ca8ae9a2dba99019226a&language=es-ES") 
       .then(response => response.json())
       .then(data => {
-          this.setState(() => {
+          
 
             let peliculas = data.results.slice(0,4);
             //le agregamos al array el atributo verdescripcion con valor false 
@@ -36,7 +36,7 @@ class MoviesHome extends Component {
             loading: false
         });
 
-        },);
+        ;
 })
         
     
