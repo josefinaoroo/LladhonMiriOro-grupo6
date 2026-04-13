@@ -3,8 +3,8 @@ import {Link} from "react-router-dom"
 function Header (props){
     let barra= [
         {menu: "Home", path: "/"},
-        {menu: "Peliculas", path: "/peliculas"},
-        {menu: "Series", path: "/series"},
+        {menu: "Peliculas", path: "/movies"},
+        {menu: "En Cartelera", path: "/encartelera"},
         {menu: "Favoritos", path: "/favoritos"},
         {menu: "Crear Cuenta", path: "/crearcuenta"},
         {menu: "Log in", path: "/login"},

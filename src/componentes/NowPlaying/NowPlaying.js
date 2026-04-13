@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./NowPlaying.css";
 import { Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
+import Movie from "../Movie/Movie";
 
 
 class NowPlaying extends Component {
@@ -61,37 +62,20 @@ render() {
 
     return (
       <>
-        <h2 className="alert alert-danger">Películas en cartel</h2>
-
-            <Link to="/peliculas" className="btn btn-info">Ver todas</Link>
-        <section className="cards" id="">
+        <h2 className="alert alert-danger">Películas en Cartelera</h2>
+            <section className="cards" id="">
           {
-            this.state.loading
-            ? <Loader />
-  
+            this.state.datos.length === 0
+              ? <Loader/>
               : peliculasFiltradas.map((elm, idx) => (
-                  <article className="single-card-movie" key={idx}>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${elm.poster_path}`}
-                      className="card-img-top"
-                      alt={elm.title}
-                    />
-                    <div className="cardBody">
-                      <h5 className="card-title">{elm.title}</h5>
-
-                      <button onClick={() => this.verDescripcion(elm.id)}>
-                        {elm.verdescripcion ? "Ver menos" : "Descripción"}
-                      </button>
-
-                      {elm.verdescripcion ? <p className="card-text">{elm.overview}</p> : null}
-
-                      <Link to={`/detalle/${elm.id}`} className="btn btn-danger">
-                            Ir a detalle
-                      </Link>
-                    </div>
-                  </article>
-                ))
+                  <Movie
+                    key={idx}
+                    dato={elm}
+                  />
+                  
+                )) 
           }
+          <a href="/movies" className="btn btn-danger">Ver todas</a>
         </section>
       </>
     );

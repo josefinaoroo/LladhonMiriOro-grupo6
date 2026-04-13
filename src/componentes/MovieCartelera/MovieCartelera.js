@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Movie from "../Movie/Movie";
-import "./Movies.css"
+import "./MovieCartelera.css"
 
-class Movies extends Component {
+class MovieCartelera extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,9 +53,9 @@ class Movies extends Component {
   render() {
     return (
       <div>
-        <h2 className="alert alert-danger">Películas</h2>
+        <h2 className="alert alert-danger">Películas en Cartelera</h2>
         
-        <section className="cards">
+        <section className="row">
           {
             this.state.peliculasFiltradas.length === 0
             ? <h3>Cargando...</h3>
@@ -83,4 +83,4 @@ class Movies extends Component {
   }
 }
 
-export default Movies;
+export default MovieCartelera;
