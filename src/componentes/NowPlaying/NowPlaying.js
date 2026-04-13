@@ -61,7 +61,7 @@ render() {
 
     return (
       <>
-        <h2 className="alert alert-primary">Películas en cartel</h2>
+        <h2 className="alert alert-danger">Películas en cartel</h2>
 
             <Link to="/peliculas" className="btn btn-info">Ver todas</Link>
         <section className="cards" id="">
@@ -85,7 +85,7 @@ render() {
 
                       {elm.verdescripcion ? <p className="card-text">{elm.overview}</p> : null}
 
-                      <Link to={`/detalle/${elm.id}`} className="btn btn-primary">
+                      <Link to={`/detalle/${elm.id}`} className="btn btn-danger">
                             Ir a detalle
                       </Link>
                     </div>

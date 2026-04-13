@@ -1,15 +1,20 @@
-import { Component } from "react";
 import Cookies from "universal-cookie";
+import {Component} from "react";
 
-class CrearCuenta extends Component {
-  constructor(props) {
+const cookies = new Cookies()
+
+class FormRegister extends Component {
+constructor(props) {
     super(props);
     this.state = {
+    
+      username: "",
       email: "",    //capturar lo que escribe el usuario en el input --> estado
       password: "",
       error: ""
     };
   }
+
   // que no se envíe el formulario
   enviarFormulario(event) {
     event.preventDefault();
@@ -46,7 +51,8 @@ class CrearCuenta extends Component {
     // crear usuario
     let nuevoUsuario = {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      username: this.state.username
     };
 
     usuarios.push(nuevoUsuario);
@@ -103,4 +109,5 @@ class CrearCuenta extends Component {
   }
 }
 
-export default CrearCuenta;
+
+export default FormRegister;
