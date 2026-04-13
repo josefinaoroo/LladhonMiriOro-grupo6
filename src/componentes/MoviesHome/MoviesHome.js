@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./MoviesHome.css";
 import { Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
+import Detalle from "../../screens/Detalle/Detalle";
 
 class MoviesHome extends Component {
   constructor(props) {

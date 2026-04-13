@@ -10,6 +10,7 @@ class CrearCuenta extends Component {
       error: ""
     };
   }
+
   // que no se envíe el formulario
   enviarFormulario(event) {
     event.preventDefault();
@@ -61,6 +62,7 @@ class CrearCuenta extends Component {
     });
 
     alert("¡Cuenta creada con éxito!");
+    this.props.history.push("/login");
   }
 
   controlarEmail(event) {
@@ -97,7 +99,7 @@ class CrearCuenta extends Component {
 
         <button type="submit">Crear cuenta</button>
 
-        {this.state.error !== "" ? <p>{this.state.error}</p> : ""}
+         {this.state.error !== "" ? <p>{this.state.error}</p> : null}
       </form>
     );
   }
