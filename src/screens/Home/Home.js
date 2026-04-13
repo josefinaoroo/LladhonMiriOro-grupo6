@@ -10,9 +10,14 @@ class Home extends Component {
     };
   }
 
-  evitarSubmit(event) {
-    event.preventDefault();
-  }
+  enviarBusqueda(event) {
+  event.preventDefault();
+
+  this.props.history.push(
+    `/search?busqueda=${this.state.valor}`
+  );
+}
+  
 
   controlarCambios(event) {
     this.setState({
@@ -23,14 +28,21 @@ class Home extends Component {
   render() {
     return (
       <>
-        <form className="filter-form px-0 mb-3"action="" method="get" onSubmit={(event) => this.evitarSubmit(event)}>
-          <input type="text" name="filter" placeholder="Buscar" onChange={(event) => this.controlarCambios(event)} value={this.state.valor}
+        <form
+          className="filter-form px-0 mb-3"
+          onSubmit={(event) => this.enviarBusqueda(event)}
+        >
+          <input
+            type="text"
+            placeholder="Buscar"
+            onChange={(event) => this.controlarCambios(event)}
+            value={this.state.valor}
           />
         </form>
 
         <main>
           <MoviesHome />
-          <NowPlaying/>
+          <NowPlaying />
         </main>
       </>
     );
