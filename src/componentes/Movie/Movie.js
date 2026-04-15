@@ -35,12 +35,13 @@ class Movie extends Component {
               {this.state.verDescripcion ? "Ver menos" : "Descripción"}
             </button>
 
-            {
-              this.state.verDescripcion
-              ? <p className="card-text mt-2">{this.props.dato.overview}</p>
-              : null
-            }
-            <Link to={`/movies/${this.props.dato.id}`} className="btn btn-danger mt-2 d-block">
+           {this.state.verDescripcion 
+               ? <p className="card-text mt-2">
+               {this.props.dato.overview.slice(0, 120)}...
+                        </p>
+                : null
+        }
+            <Link to={`/detalle/${this.props.dato.id}`} className="btn btn-danger mt-2 d-block">
               Ir a detalle
             </Link>
           </div>
