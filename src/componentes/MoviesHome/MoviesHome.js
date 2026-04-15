@@ -1,46 +1,32 @@
 import React, { Component } from "react";
-import "./MoviesHome.css";
-import { Link } from "react-router-dom";
+import "./MoviesHome.css"
+import Movie from "../Movie/Movie";
 import Loader from "../Loader/Loader";
-import Detalle from "../../screens/Detalle/Detalle";
+
 
 class MoviesHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
       datos: [],
-      valor: "",
-      loading: true,
+      valor: ""
     };
   }
-  //esto reenderiza cuando se monta la pagina
-  //fetch: trae info API y desestructura apenas de abre todo lo de la API
-  //DidUpdate: cuando hay un update en un componente --> no refresa todo, sino el componente
-  //slice --> agarra de la API 4 peliculas 
-  //pelidescri --> realiza un map de las peliculas que me trajo 
+
   componentDidMount() {
-    fetch("https://api.themoviedb.org/3/movie/popular?api_key=22424f1be1f9ca8ae9a2dba99019226a&language=es-ES") 
+    fetch("https://api.themoviedb.org/3/movie/popular?api_key=22424f1be1f9ca8ae9a2dba99019226a&language=es-ES")
       .then(response => response.json())
       .then(data => {
-          
-
-            let peliculas = data.results.slice(0,4);
-            //le agregamos al array el atributo verdescripcion con valor false 
-            let pelidescri = peliculas.map(function(peli){
-            peli.verdescripcion = false;
-            return peli
-            
-        });
+        let peliculas = data.results.slice(0,4);
+        let pelidescri= peliculas.map(function(peli){
+          peli.verdescripcion= false;
+          return peli;
+        })
+         this.setState({
+            datos: pelidescri
+          })
         
-        this.setState({
-            datos: pelidescri,
-            loading: false
-        });
-
-        ;
-})
-        
-    
+      })
       .catch(error => console.log(error));
   }
 
@@ -53,59 +39,32 @@ class MoviesHome extends Component {
       valor: event.target.value
     });
   }
-//como parametro --> id. a esa propia id nos fijamos el valor que tiene verdescripcion (atributo que agregamos arriba)
-//compara el id y cambia el valor que tiene verdescripcion --> asi trabaja las tarjetas de manera autonoma
-  verDescripcion(id){
-    let peliculasModificadas = this.state.datos.map(function(peli){
-      if (peli.id === id){
-        peli.verdescripcion = !peli.verdescripcion;
-      }
-      return peli;
-    })
-    this.setState({
-      datos: peliculasModificadas
-    })
-    }
 
   
 render() {
     let peliculasFiltradas = this.state.datos.filter(elm =>
       elm.title.toLowerCase().includes(this.state.valor.toLowerCase())
     );
+    console.log(peliculasFiltradas);
+    
 
     return (
       <>
         <h2 className="alert alert-danger">Películas más populares</h2>
-
-          <Link to="/peliculas" className="btn btn-info">Ver todas</Link>
-        <section className="cards" id="">
+        <section className="cards">
           {
             this.state.datos.length === 0
-              ? <Loader />
+              ? <Loader/>
               : peliculasFiltradas.map((elm, idx) => (
-                  <article className="single-card-movie" key={idx}>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${elm.poster_path}`}
-                      className="card-img-top"
-                      alt={elm.title}
-                    />
-                    <div className="cardBody">
-                      <h5 className="card-title">{elm.title}</h5>
-
-                      <button onClick={() => this.verDescripcion(elm.id)}>
-                        {elm.verdescripcion ? "Ver menos" : "Descripción"}
-                      </button>
-
-                      {elm.verdescripcion ? <p className="card-text">{elm.overview}</p> : null}
-
-                      <Link to={`/detalle/${elm.id}`} className="btn btn-danger">
-                        Ir a detalle
-                      </Link>
-                    </div>
-                  </article>
-                ))
+                  <Movie
+                    key={idx}
+                    dato={elm}
+                  />
+                  
+                )) 
           }
         </section>
+        <a href="/movies" className="btn btn-danger">Ver todas</a>
       </>
     );
   }

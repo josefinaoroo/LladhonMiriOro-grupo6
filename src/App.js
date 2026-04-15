@@ -9,6 +9,8 @@ import Footer from "./componentes/Footer/Footer";
 import CrearCuenta from "./screens/CrearCuenta/CrearCuenta";
 import Detalle from "./screens/Detalle/Detalle";
 import SearchResults from "./screens/SearchResults/SearchResults";
+import Movies from "./componentes/Movies/Movies";
+import MovieCartelera from "./componentes/MovieCartelera/MovieCartelera";
 
 //recordar login /:busqueda --> esto es para obtener la info que ingresa el usuario
 //chequear que se pone en notfound (habiamos puesto estrellita)
@@ -20,6 +22,8 @@ function App() {
       <Header/>
       <Switch>
         <Route path="/" exact= {true} component={Home}/>
+        <Route path="/movies" component={Movies}/>
+        <Route path="/encartelera" component={MovieCartelera}/>
         <Route path="/login" component={Login}/> 
         <Route path="/favoritos" component={Favoritos}/>
         <Route path="/crearcuenta" component={CrearCuenta}/>

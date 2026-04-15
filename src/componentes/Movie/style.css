@@ -1,0 +1,24 @@
+/*movie y serie*/
+.info {
+  padding: 15px;
+}
+
+.info h3 {
+  margin-bottom: 10px;
+}
+
+.description {
+  margin-bottom: 15px;
+}
+
+.ver-mas {
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.row img {
+  border-radius: 8px;
+}
+body{
+  background-color: black;
+}
