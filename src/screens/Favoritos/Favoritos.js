@@ -1,87 +1,66 @@
 import React, { Component } from "react";
 import Cookies from "universal-cookie";
-import { Link } from "react-router-dom";
-import Loader from "../../componentes/Loader/Loader";
-
-const cookies = new Cookies();
+import FavoritoItem from "../../componentes/Favorito/Favortio";
+const cookies = new Cookies(); 
 
 class Favoritos extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      peliculas: [],
-      loading: true,
+      favoritos: [] //cuando se carguen se van a guardar acá 
     };
   }
 
   componentDidMount() {
-    const cookie = cookies.get("user-auth-cookie");
+    // Verificar cookie de sesión
+    const cookie = cookies.get("user-auth-cookie"); 
     if (!cookie) {
       this.props.history.push("/login");
       return;
     }
 
-    let favoritos = localStorage.getItem("favoritos");
+    // Traer favoritos del localStorage
+    const storage = localStorage.getItem("favoritos"); 
 
-    if (favoritos === null) {
-      this.setState({ loading: false });
-      return;
+    if (storage !== null) {
+      this.setState({ favoritos: JSON.parse(storage) });
     }
-
-    favoritos = JSON.parse(favoritos);
-
-    favoritos.forEach((id) => {
-      fetch("https://api.themoviedb.org/3/movie/" + id + "?api_key=22424f1be1f9ca8ae9a2dba99019226a&language=es-ES")
-        .then((res) => res.json())
-        .then((data) => {
-          this.setState((estadoAnterior) => ({
-            peliculas: [...estadoAnterior.peliculas, data],
-            loading: false,
-          }));
-        })
-        .catch((err) => console.log(err));
-    });
   }
 
   eliminarFavorito(id) {
-    let favoritos = localStorage.getItem("favoritos");
-    favoritos = JSON.parse(favoritos);
-
-    const nuevaLista = favoritos.filter((favId) => favId !== id);
-    localStorage.setItem("favoritos", JSON.stringify(nuevaLista));
-
-    const peliculas = this.state.peliculas.filter((p) => p.id !== id);
-    this.setState({ peliculas });
+    // Filtrar el que queremos eliminar
+    let nuevos = this.state.favoritos.filter(i => i.id !== id); 
+    //El filter() lo usamos para quedarnos con todos los fav - el id que queremos borrar 
+    // Guardar de nuevo en localStorage
+    localStorage.setItem("favoritos", JSON.stringify(nuevos));
+    this.setState({ favoritos: nuevos });
   }
 
   render() {
-    if (this.state.loading) {
-      return <Loader />;
-    }
+    // Separar películas y series
+    const peliculas = this.state.favoritos.filter(i => i.tipo === "movie");
+    const series = this.state.favoritos.filter(i => i.tipo === "tv");
 
     return (
       <div>
-        <h1>Mis Favoritos</h1>
+        <h2>Películas favoritas</h2>
+        {peliculas.map(pelicula => (
+//.map() lo usamos para renderizar un favitem por cd peli, le pasa el item con toda la info a eliminar (=series)
+          <FavoritoItem
+            key={pelicula.id}
+            item={pelicula}
+            eliminar={(id) => this.eliminarFavorito(id)}
+          />
+        ))}
 
-        {this.state.peliculas.length === 0 ? (
-          <p>No tenés películas favoritas.</p>
-        ) : (
-          this.state.peliculas.map((peli) => (
-            <div key={peli.id}>
-              <Link to={"/detalle/" + peli.id}>
-                <img
-                  src={"https://image.tmdb.org/t/p/w500" + peli.poster_path}
-                  alt={peli.title}
-                  width="150"
-                />
-                <h3>{peli.title}</h3>
-              </Link>
-              <button onClick={() => this.eliminarFavorito(peli.id)}>
-                Eliminar de favoritos
-              </button>
-            </div>
-          ))
-        )}
+        <h2>Series favoritas</h2>
+        {series.map(serie => (
+          <FavoritoItem
+            key={serie.id}
+            item={serie}
+            eliminar={(id) => this.eliminarFavorito(id)}
+          />
+        ))}
       </div>
     );
   }
