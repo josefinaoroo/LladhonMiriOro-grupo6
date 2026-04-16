@@ -1,15 +1,14 @@
 .cards{
+    color: rgb(113, 10, 10);
     padding: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    background-color: black;
 }
 
 .single-card-movie{
     width: 24%;
     margin-bottom: 30px;
-    background-color: #111;
     padding: 10px;
     border-radius: 6px;
     box-sizing: border-box;
@@ -25,19 +24,18 @@
 }
 
 .card-title{
-    color: white;
+    color: rgb(113, 10, 10);
     margin-bottom: 10px;
     min-height: 40px;
 }
 
 .card-text{
-    color: #ddd;
+    color: rgb(113, 10, 10);
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 a{
-    color: white;
     text-decoration: none;
 
 }
@@ -49,9 +47,7 @@ a{
 .btn-primary{
     margin-left: 160px;
 }
-.card{
-    background-color: black;
-}
+
 .button{
     background-color: red;
 }

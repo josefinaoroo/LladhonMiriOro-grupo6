@@ -72,7 +72,7 @@ class Movies extends Component {
         {
           this.state.pagina < this.state.peliculasFiltradas.length
           ?
-          <button onClick={() => this.cargarMas()} className="btn btn-danger mt-3">
+          <button onClick={() => this.cargarMas()} className="btn btn-danger">
             Cargar más
           </button>
           :

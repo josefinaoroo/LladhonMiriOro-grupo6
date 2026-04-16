@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Cookies from "universal-cookie";
-import FavoritoItem from "../../componentes/Favorito/Favortio";
+import FavoritoItem from "../../componentes/Favorito/Favorito";
 const cookies = new Cookies(); 
 
 class Favoritos extends Component {
@@ -13,10 +13,10 @@ class Favoritos extends Component {
 
   componentDidMount() {
     // Verificar cookie de sesión
-    const cookie = cookies.get("user-auth-cookie"); 
+    const cookie = cookies.get("user"); 
     if (!cookie) {
       this.props.history.push("/login");
-      return;
+      ;
     }
 
     // Traer favoritos del localStorage

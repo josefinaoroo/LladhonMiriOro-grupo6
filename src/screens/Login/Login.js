@@ -33,11 +33,12 @@ class Login extends Component {
       this.setState({
         error: "Credenciales incorrectas"
       });
-      return;
+      
+      ;
     }
 
     // 👉 GUARDAR COOKIE
-    cookies.set("user-auth-cookie", this.state.email, { path: "/" });
+    cookies.set("user", this.state.email, { path: "/" });
 
     // 👉 REDIRECCIÓN
     this.props.history.push("/");
@@ -65,7 +66,7 @@ class Login extends Component {
           onChange={(e) => this.setState({ password: e.target.value })}
         />
 
-        <button type="submit">Ingresar</button>
+        <button type="submit" className="btn btn-danger">Ingresar</button>
 
         {this.state.error !== "" ? <p>{this.state.error}</p> : null}
       </form>

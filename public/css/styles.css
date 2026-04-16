@@ -7,14 +7,16 @@ nav {
 }
 .nav {
     margin: 0 !important;
+    background-color: rgb(245, 201, 204);
 }
 .nav a{
-    color: #444;
+    color:rgb(113, 10, 10);
     text-decoration: none;
 }
 .nav a:hover{
     font-weight: bold;
 }
+
 .search-form, .filter-form {
     padding: .5rem 0;
     margin-bottom: 20px;
@@ -28,6 +30,9 @@ nav {
 .search-form .btn-sm{
     line-height: 1;
     font-size: 0.9rem;
+}
+p{
+    color:rgb(113, 10, 10)
 }
 .search-form input,
 .filter-form input {
@@ -49,7 +54,9 @@ nav {
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 2%;
+    ;
 }
+
 .cardBody {
     margin-top: 20px;
 }

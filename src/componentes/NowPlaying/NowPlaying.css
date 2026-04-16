@@ -1,6 +1,5 @@
 body{
-    background-color: black;
-    color: white;
+    color: rgb(113, 10, 10);
     margin: 0;
 }
 
@@ -9,7 +8,7 @@ main{
 }
 
 h1, h2{
-    color: white;
+    color: rgb(113, 10, 10);
     margin-bottom: 15px;
 }
 
@@ -28,7 +27,6 @@ h1, h2{
 .single-card-movie{
     width: 24%;
     margin-bottom: 30px;
-    background-color: #111;
     padding: 10px;
     border-radius: 6px;
     box-sizing: border-box;
@@ -44,20 +42,20 @@ h1, h2{
 }
 
 .card-title{
-    color: white;
+    color: rgb(113, 10, 10);
     margin-bottom: 10px;
     min-height: 40px;
 }
 
 .card-text{
-    color: #ddd;
+    color: rgb(113, 10, 10);
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 button{
     background-color: red;
-    color: white;
+    color: rgb(113, 10, 10);
     border: none;
     padding: 6px 10px;
     border-radius: 4px;
@@ -66,7 +64,7 @@ button{
 }
 
 a{
-    color: white;
+    color: rgb(113, 10, 10);
     text-decoration: none;
 
 }

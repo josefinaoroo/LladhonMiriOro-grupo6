@@ -30,7 +30,7 @@ class Movie extends Component {
 
             <button
               onClick={() => this.verDescripcion()}
-              className="btn btn-danger btn-sm"
+              className="btn btn-danger"
             >
               {this.state.verDescripcion ? "Ver menos" : "Descripción"}
             </button>
