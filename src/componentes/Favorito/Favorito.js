@@ -15,11 +15,10 @@ function FavoritoItem(props) {
     src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
     alt={item.titulo}
   />
-
-            <Link to={"/detalle/" + item.id}> 
+            <Link to={"/detalle/" + item.id} className= "btn btn-danger mt-2" > 
                 Ver detalle 
             </Link>
-            <button className="btn btn-danger" onClick={() => eliminar(item.id)}> 
+            <button className="btn btn-danger mt-2" onClick={() => eliminar(item.id)}> 
                 Eliminar
             </button>
         </div>
