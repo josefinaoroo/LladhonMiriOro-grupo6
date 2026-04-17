@@ -36,7 +36,7 @@ class Home extends Component {
         >
           <input
             type="text"
-            placeholder="Buscar"
+            placeholder="¿Qué estás buscando?"
             onChange={(event) => this.controlarCambios(event)}
             value={this.state.valor}
           />
