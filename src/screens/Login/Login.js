@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Cookies from "universal-cookie";
+import Header from "../../componentes/Header/Header";
 
 const cookies = new Cookies();
 
@@ -53,26 +54,30 @@ class Login extends Component {
 
   render() {
     return (
-      <form onSubmit={(e) => this.iniciarSesion(e)}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={this.state.email}
-          onChange={(e) => this.setState({ email: e.target.value })}
-        />
+        <>
+        <Header/>
+          <h2 class="alert alert-danger">Iniciar sesión</h2>
+        <div className= "row justify-content-center">
+            <div class="col-md-6">
+                 <form onSubmit={(e) => this.iniciarSesion(e)}>
+                    <div className="form-group">
+                        <input type="email" placeholder="Email" className="form-control" value={this.state.email} 
+                        onChange={(e) => this.setState({ email: e.target.value })}/>
+            </div>
+            <div>
+                <input type="password" placeholder="Password" className= "form-control"value={this.state.password}
+                 onChange={(e) => this.setState({ password: e.target.value })}/>
+            </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={this.state.password}
-          onChange={(e) => this.setState({ password: e.target.value })}
-        />
-
-        <button type="submit" className="btn btn-danger">Ingresar</button>
-
+         <button type="submit" className="btn btn-danger btn-block">Ingresar</button>
+         <p class="mt-3 text-center">¿No tenés cuenta? <a href="/crearcuenta">Registrarse</a></p>
         {this.state.error !== "" ? <p>{this.state.error}</p> : null}
       </form>
-    );
+            </div>
+        </div>
+        
+        </>
+    )
   }
 }
 

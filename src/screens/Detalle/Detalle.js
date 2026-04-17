@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Detalle.css";
 import Loader from "../../componentes/Loader/Loader";
 import Cookies from "universal-cookie";
+import Header from "../../componentes/Header/Header";
 const cookies = new Cookies();
 
 class Detalle extends Component {
@@ -64,6 +65,7 @@ agregarFavorito() {
 
     return (
       <div className="detalle-container">
+        <Header/>
         <h1>{peli.title}</h1>
 
         <img
@@ -79,11 +81,7 @@ agregarFavorito() {
 
         {/* SOLO SI ESTÁ LOGUEADO */}
         {/*si existe muestra el boton agregar fav sino, no muestra nada*/}
-        {cookies.get("user") && (
-          <button onClick={() => this.agregarFavorito()}>
-            Agregar a favoritos
-          </button>
-        )}
+        
       </div>
     );
   }

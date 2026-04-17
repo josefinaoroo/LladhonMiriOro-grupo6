@@ -1,5 +1,6 @@
 import { Component } from "react";
 import Cookies from "universal-cookie";
+import Header from "../../componentes/Header/Header";
 
 class CrearCuenta extends Component {
   constructor(props) {
@@ -81,26 +82,28 @@ class CrearCuenta extends Component {
 
   render() {
     return (
-      <form onSubmit={(event) => this.enviarFormulario(event)}>
-        
-        <input
-          type="email"
-          placeholder="Email"
-          value={this.state.email}
-          onChange={(event) => this.controlarEmail(event)}
-        />
-
-        <input
-          type="password"
-          placeholder="Password"
-          value={this.state.password}
-          onChange={(event) => this.controlarPassword(event)}
-        />
-
-        <button type="submit">Crear cuenta</button>
-
+        <>
+        <Header/>
+        <h2 className="alert alert-danger">Registrarse</h2>
+        <div className="row justify-content-center">
+            <div className="col-md-6">
+                <form onSubmit={(event) => this.enviarFormulario(event)}>
+                    <div className="form-group">
+                        <input type="email" placeholder="Email" className="form-control"value={this.state.email}
+                            onChange={(event) => this.controlarEmail(event)}/>
+                    </div>
+                    <div>
+                        <input type="password" placeholder="Password" className="form-control" value={this.state.password}
+                            onChange={(event) => this.controlarPassword(event)}/>
+                    </div>
+                    <button type="submit" className="btn btn-danger btn-block">Crear cuenta</button>
+                </form>
+                <p class="mt-3 text-center">¿Ya tenés cuenta? <a href="/login">Iniciar sesión</a></p>
+            </div>
          {this.state.error !== "" ? <p>{this.state.error}</p> : null}
-      </form>
+        </div>
+        </>
+        
     );
   }
 }

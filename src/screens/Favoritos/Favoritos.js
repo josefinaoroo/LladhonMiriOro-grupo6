@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Cookies from "universal-cookie";
 import FavoritoItem from "../../componentes/Favorito/Favorito";
+import Header from "../../componentes/Header/Header";
 const cookies = new Cookies(); 
 
 class Favoritos extends Component {
@@ -43,7 +44,9 @@ class Favoritos extends Component {
 
     return (
       <div>
-        <h2>Películas favoritas</h2>
+        <Header/>
+        <h2 className="alert alert-danger">Películas favoritas</h2>
+        <section className="row cards">
         {peliculas.map(pelicula => (
 //.map() lo usamos para renderizar un favitem por cd peli, le pasa el item con toda la info a eliminar (=series)
           <FavoritoItem
@@ -52,15 +55,17 @@ class Favoritos extends Component {
             eliminar={(id) => this.eliminarFavorito(id)}
           />
         ))}
-
-        <h2>Series favoritas</h2>
-        {series.map(serie => (
+        </section>
+        <h2 className="alert alert-danger">Series favoritas</h2>
+        <section>
+            {series.map(serie => (
           <FavoritoItem
             key={serie.id}
             item={serie}
             eliminar={(id) => this.eliminarFavorito(id)}
           />
         ))}
+        </section>
       </div>
     );
   }

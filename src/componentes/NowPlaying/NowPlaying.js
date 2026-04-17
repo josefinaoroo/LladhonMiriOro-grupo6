@@ -75,7 +75,7 @@ render() {
                   
                 )) 
           }
-          <a href="/movies" className="btn btn-danger">Ver todas</a>
+          <a href="/moviesscreen" className="btn btn-danger">Ver todas</a>
         </section>
       </>
     );

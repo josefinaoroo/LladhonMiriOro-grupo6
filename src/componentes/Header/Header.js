@@ -18,18 +18,18 @@ function Header() {
                         <Link to="/" className="nav-link">Home</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/movies" className="nav-link">
+                        <Link to="/moviesscreen" className="nav-link">
                             Peliculas
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/encartelera" className="nav-link">
+                        <Link to="/moviesscreencartelera" className="nav-link">
                             En Cartelera
                         </Link>
                     </li>
                     {usuario ? (
                         <li className="nav-item">
-                            <Link to="/favoritos" className="nav-link">Favoritas</Link>
+                            <Link to="/favoritos" className="nav-link">Favoritos</Link>
                         </li>): ""}
 
                     {!usuario ? (

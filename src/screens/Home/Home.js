@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MoviesHome from "../../componentes/MoviesHome/MoviesHome";
 import NowPlaying from "../../componentes/NowPlaying/NowPlaying";
+import Header from "../../componentes/Header/Header";
 
 class Home extends Component {
   constructor(props) {
@@ -28,8 +29,9 @@ class Home extends Component {
   render() {
     return (
       <>
+      <Header/>
         <form
-          className="filter-form px-0 mb-3"
+          className="search-form"
           onSubmit={(event) => this.enviarBusqueda(event)}
         >
           <input
@@ -38,6 +40,7 @@ class Home extends Component {
             onChange={(event) => this.controlarCambios(event)}
             value={this.state.valor}
           />
+          <button type="submit" className="btn btn-danger btn-sm">Buscar</button>
         </form>
 
         <main>

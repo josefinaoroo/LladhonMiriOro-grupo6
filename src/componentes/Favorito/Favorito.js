@@ -6,8 +6,9 @@ function FavoritoItem(props) {
     const eliminar = props.eliminar; //eliminar --> es la función 
 
     return (
-        <div>
-            <h3>{item.titulo}</h3>
+        <article className="col-md-3 mb-4">
+            <div className="card h-100">
+            <h3 className= "card-title">{item.titulo}</h3>
 
             <img
     className="card-img-top"
@@ -18,10 +19,12 @@ function FavoritoItem(props) {
             <Link to={"/detalle/" + item.id}> 
                 Ver detalle 
             </Link>
-            <button onClick={() => eliminar(item.id)}> 
+            <button className="btn btn-danger" onClick={() => eliminar(item.id)}> 
                 Eliminar
             </button>
         </div>
+        </article>
+
     );
 }
 

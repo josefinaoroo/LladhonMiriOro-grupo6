@@ -9,7 +9,7 @@ class MoviesHome extends Component {
     super(props);
     this.state = {
       datos: [],
-      valor: ""
+      valor: "",
     };
   }
 
@@ -64,7 +64,7 @@ render() {
                 )) 
           }
         </section>
-        <a href="/movies" className="btn btn-danger">Ver todas</a>
+        <a href="/moviesscreen" className="btn btn-danger">Ver todas</a>
       </>
     );
   }

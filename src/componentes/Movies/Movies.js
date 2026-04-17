@@ -38,29 +38,37 @@ class Movies extends Component {
       })
       .catch(error => console.log(error));
   }
+  evitarSubmit(evento) {
+    evento.preventDefault();
+  }
+  controlCambios(evento){
+        this.setState({
+            valor: evento.target.value
+        },() => this.filtrarPeliculas(this.state.valor)
+        )
+    }
 
   
-  filtrarPeliculas() {
-    let peliculasFiltradas = this.state.datos.filter((elm) =>
-      elm.title.toLowerCase().includes(this.state.valor.toLowerCase())
-    );
-
+  filtrarPeliculas(textoAFiltrar) {
     this.setState({
-      peliculasFiltradas: peliculasFiltradas
+      peliculasFiltradas: this.state.datos.filter((elm) => elm.title.toLowerCase().includes(textoAFiltrar).toLowerCase())
     });
   }
 
   render() {
     return (
       <div>
+        <form className="filter-form px-0 mb-3" onSubmit={(evento) => this.evitarSubmit(evento)}>
+                    <label className="label-filtrar">
+                        Filtrar pelicula: </label>
+                    <input type="text" onChange={(evento)=> this.controlCambios(evento)}/>
+                </form>
         <h2 className="alert alert-danger">Películas</h2>
-        
         <section className="cards">
           {
             this.state.peliculasFiltradas.length === 0
             ? <h3>Cargando...</h3>
-            : this.state.peliculasFiltradas
-                .map((elm, idx) => (
+            : this.state.peliculasFiltradas.map((elm, idx) => (
                   <Movie
                     key={idx}
                     dato={elm}

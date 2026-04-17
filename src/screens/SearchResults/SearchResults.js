@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Loader from "../../componentes/Loader/Loader";
 import Cookies from "universal-cookie";
+import Header from "../../componentes/Header/Header";
 const cookies = new Cookies();
 
 class SearchResults extends Component {
@@ -64,26 +65,26 @@ class SearchResults extends Component {
     }
 
     return (
-      <section className="cards">
+      <>
+        <Header/>
+        <section className="row cards">
         {this.state.resultados.map((elm, idx) => (
           <article key={idx} className="single-card-movie">
-            <img
+            <img className="card-img-top"
               src={`https://image.tmdb.org/t/p/w500${elm.poster_path}`}
               alt={elm.title}
             />
-
-            <h5>{elm.title}</h5>
-
-            <Link to={`/detalle/${elm.id}`}>
+            <h5 className="card-title">{elm.title}</h5>
+            <Link to={`/detalle/${elm.id}`} className="btn btn-danger mt-2 d-block">
               Ir a detalle
             </Link>
-
             {cookies.get("user") && (
               <button>Agregar a favoritos</button>
             )}
           </article>
         ))}
       </section>
+      </>
     );
   }
 }

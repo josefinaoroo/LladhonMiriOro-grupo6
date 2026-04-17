@@ -67,7 +67,7 @@ class Movie extends Component {
 
            {this.state.verDescripcion 
                ? <p className="card-text mt-2">
-               {this.props.dato.overview.slice(0, 120)}...
+               {this.props.dato.overview}...
                         </p>
                 : null
         }
@@ -78,7 +78,7 @@ class Movie extends Component {
            {cookies.get("user") && (
   <button
     onClick={() => this.agregarFavorito()}
-    className="btn btn-warning mt-2"
+    className="btn btn-danger mt-2"
   >
     Agregar a favoritos
   </button>
