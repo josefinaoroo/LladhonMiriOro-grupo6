@@ -51,7 +51,7 @@ class Movies extends Component {
   
   filtrarPeliculas(textoAFiltrar) {
     this.setState({
-      peliculasFiltradas: this.state.datos.filter((elm) => elm.title.toLowerCase().includes(textoAFiltrar).toLowerCase())
+      peliculasFiltradas: this.state.datos.filter((elm) => elm.title.toLowerCase().includes(textoAFiltrar.toLowerCase()))
     });
   }
 
