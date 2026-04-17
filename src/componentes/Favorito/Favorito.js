@@ -8,10 +8,17 @@ function FavoritoItem(props) {
     return (
         <div>
             <h3>{item.titulo}</h3>
-            <Link to={"/detalle/" + item.id}> //navegamos al detalle de la película usando su id 
+
+            <img
+    className="card-img-top"
+    src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+    alt={item.titulo}
+  />
+
+            <Link to={"/detalle/" + item.id}> 
                 Ver detalle 
             </Link>
-            <button onClick={() => eliminar(item.id)}> //para borrar una película de favoritos 
+            <button onClick={() => eliminar(item.id)}> 
                 Eliminar
             </button>
         </div>

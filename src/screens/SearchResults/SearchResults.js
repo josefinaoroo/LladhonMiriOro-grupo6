@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Loader from "../../componentes/Loader/Loader";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 class SearchResults extends Component {
   constructor(props) {
@@ -76,7 +78,7 @@ class SearchResults extends Component {
               Ir a detalle
             </Link>
 
-            {localStorage.getItem("usuarioLogueado") && (
+            {cookies.get("user") && (
               <button>Agregar a favoritos</button>
             )}
           </article>
