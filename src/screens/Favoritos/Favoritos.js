@@ -29,7 +29,7 @@ class Favoritos extends Component {
 
   eliminarFavorito(id) {
     // Filtrar el que queremos eliminar
-    let nuevos = this.state.favoritos.filter(i => i.id !== id); 
+    let nuevos = this.state.favoritos.filter(i => i !== id); 
     //El filter() lo usamos para quedarnos con todos los fav - el id que queremos borrar 
     // Guardar de nuevo en localStorage
     localStorage.setItem("favoritos", JSON.stringify(nuevos));
@@ -38,8 +38,8 @@ class Favoritos extends Component {
 
   render() {
     // Separar películas y series
-    const peliculas = this.state.favoritos.filter(i => i.tipo === "movie");
-    const series = this.state.favoritos.filter(i => i.tipo === "tv");
+    const peliculas = this.state.favoritos.filter(i => i === "movie");
+    const series = this.state.favoritos.filter(i => i === "tv");
 
     return (
       <div>

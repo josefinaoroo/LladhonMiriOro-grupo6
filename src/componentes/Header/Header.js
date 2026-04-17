@@ -2,9 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
 
-
-
-
 function Header() {
     const cookies = new Cookies()
     let usuario = cookies.get("user")

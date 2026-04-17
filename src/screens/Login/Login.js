@@ -33,14 +33,14 @@ class Login extends Component {
       this.setState({
         error: "Credenciales incorrectas"
       });
-      
+      return;
       ;
     }
 
-    // 👉 GUARDAR COOKIE
+    // GUARDAR COOKIE
     cookies.set("user", this.state.email, { path: "/" });
 
-    // 👉 REDIRECCIÓN
+    // REDIRECCIÓN
     this.props.history.push("/");
 
     // limpiar
@@ -56,12 +56,14 @@ class Login extends Component {
       <form onSubmit={(e) => this.iniciarSesion(e)}>
         <input
           type="email"
+          placeholder="Email"
           value={this.state.email}
           onChange={(e) => this.setState({ email: e.target.value })}
         />
 
         <input
           type="password"
+          placeholder="Password"
           value={this.state.password}
           onChange={(e) => this.setState({ password: e.target.value })}
         />
