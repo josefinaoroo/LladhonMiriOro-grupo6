@@ -39,7 +39,7 @@ class Search extends Component {
                     className=""
                     name="searchData"
                 />
-                <button type="submit" className="btn btn-success btn-sm">Buscar</button>
+                <button type="submit" className="btn btn-danger btn-sm">Buscar</button>
                 <select onChange={(e) => this.controlSelect(e)} value={this.state.tipo}>
                     <option value="movie">Películas</option>
                     <option value="tv">Series</option>
