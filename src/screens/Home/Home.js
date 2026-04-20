@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MoviesHome from "../../componentes/MoviesHome/MoviesHome";
 import NowPlaying from "../../componentes/NowPlaying/NowPlaying";
 import Header from "../../componentes/Header/Header";
+import Search from "../Search/Search";
 
 class Home extends Component {
   constructor(props) {
@@ -14,9 +15,7 @@ class Home extends Component {
   enviarBusqueda(event) {
   event.preventDefault();
 
-  this.props.history.push(
-    `/search?busqueda=${this.state.valor}`
-  );
+  this.props.history.push(`/results/movie/${this.state.valor}`);
 }
   
 
@@ -30,19 +29,7 @@ class Home extends Component {
     return (
       <>
       <Header/>
-        <form
-          className="search-form"
-          onSubmit={(event) => this.enviarBusqueda(event)}
-        >
-          <input
-            type="text"
-            placeholder="¿Qué estás buscando?"
-            onChange={(event) => this.controlarCambios(event)}
-            value={this.state.valor}
-          />
-          <button type="submit" className="btn btn-danger btn-sm">Buscar</button>
-        </form>
-
+        <Search />
         <main>
           <MoviesHome />
           <NowPlaying />

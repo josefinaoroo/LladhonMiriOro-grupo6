@@ -7,9 +7,10 @@ import NotFound from "./componentes/NotFound/NotFound";
 import Footer from "./componentes/Footer/Footer";
 import CrearCuenta from "./screens/CrearCuenta/CrearCuenta";
 import Detalle from "./screens/Detalle/Detalle";
-import SearchResults from "./screens/SearchResults/SearchResults";
+import Search from "./screens/Search/Search";
 import MoviesScreen from "./screens/MoviesScreen/MoviesScreen";
 import MoviesScreenCartelera from "./screens/MoviesCarteleraScreen/MoviesCarteleraScreen";
+import Results from "./componentes/Results/Results";
 
 //recordar login /:busqueda --> esto es para obtener la info que ingresa el usuario
 //chequear que se pone en notfound (habiamos puesto estrellita)
@@ -20,16 +21,15 @@ function App() {
     <React.Fragment>
       <Switch>
         <Route path="/" exact= {true} component={Home}/>
+        <Route path="/results/:tipo/:busqueda" component={Results}/>
         <Route path="/moviesscreen" component={MoviesScreen}/>
         <Route path="/moviesscreencartelera" component={MoviesScreenCartelera}/>
         <Route path="/login" component={Login}/> 
         <Route path="/favoritos" component={Favoritos}/>
         <Route path="/crearcuenta" component={CrearCuenta}/>
         <Route path="/detalle/:id" component={Detalle} />
-        <Route path="/search" component={SearchResults}/>
         <Route component={NotFound}/>
-
-      </Switch>
+    </Switch>
       <Footer/>
     </React.Fragment>
    </>
