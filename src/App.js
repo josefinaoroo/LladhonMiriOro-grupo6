@@ -7,7 +7,6 @@ import NotFound from "./componentes/NotFound/NotFound";
 import Footer from "./componentes/Footer/Footer";
 import CrearCuenta from "./screens/CrearCuenta/CrearCuenta";
 import Detalle from "./screens/Detalle/Detalle";
-import Search from "./screens/Search/Search";
 import MoviesScreen from "./screens/MoviesScreen/MoviesScreen";
 import MoviesScreenCartelera from "./screens/MoviesCarteleraScreen/MoviesCarteleraScreen";
 import Results from "./componentes/Results/Results";
