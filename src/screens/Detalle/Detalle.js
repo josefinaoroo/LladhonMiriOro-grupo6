@@ -10,7 +10,8 @@ class Detalle extends Component {
     super(props);
     this.state = {
       pelicula: null,
-      loading: true
+      loading: true,
+      esFavorito: false
     };
   }
 
@@ -23,7 +24,9 @@ class Detalle extends Component {
       
         this.setState({
         pelicula: data,
-        loading: false
+        loading: false,
+        esFavorito: this.chequearFavoritoInicial(data.id)
+
     });
 
 })
@@ -47,13 +50,64 @@ agregarFavorito() {
   poster_path: peli.poster_path
 };
 
-  let existe = favoritos.some(fav => fav.id === peli.id);
+  let existe = favoritos.filter(fav => fav.id === peli.id);
 
-  if (!existe) {
+  if (existe.length === 0) {
     favoritos.push(objeto);
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
+
+    this.setState ({
+      esFavorito: true
+    });
+
     alert("Agregado a favoritos");
   }
+}
+
+esFavorito() {
+  let favoritos = localStorage.getItem("favoritos");
+
+  if (favoritos === null) {
+    return false;
+  }
+
+  favoritos = JSON.parse(favoritos);
+
+  let resultado = favoritos.filter(fav => fav.id === this.state.pelicula.id);
+
+  return resultado.length > 0;
+}
+
+eliminarFavorito() {
+  let favoritos = localStorage.getItem("favoritos");
+
+  if (favoritos !== null) {
+    favoritos = JSON.parse(favoritos);
+
+    let nuevos = favoritos.filter(fav => fav.id !== this.state.pelicula.id);
+
+    localStorage.setItem("favoritos", JSON.stringify(nuevos));
+
+    this.setState({
+      esFavorito: false
+    });
+
+    alert("Eliminado de favoritos");
+  }
+}
+
+chequearFavoritoInicial(id) {
+  let favoritos = localStorage.getItem("favoritos");
+
+  if (favoritos === null) {
+    return false;
+  }
+
+  favoritos = JSON.parse(favoritos);
+
+  let resultado = favoritos.filter(fav => fav.id === id);
+
+  return resultado.length > 0;
 }
 
   render() {
@@ -78,6 +132,24 @@ agregarFavorito() {
         <p><strong>Duración:</strong> {peli.runtime} minutos</p>
         <p><strong>Géneros:</strong> {peli.genres.map(g => g.name).join(", ")}</p>
         <p><strong>Sinopsis:</strong> {peli.overview}</p>
+
+        {cookies.get("user")  && (
+          this.state.esFavorito ? (
+          <button
+          onClick={() => this.eliminarFavorito()}
+        className="btn btn-danger mt-2"
+          >
+             Eliminar de favoritos
+           </button>
+        ) : (
+       <button
+         onClick={() => this.agregarFavorito()}
+        className="btn btn-danger mt-2"
+    >
+             Agregar a favoritos
+    </button>
+  )
+)}
 
         {/* SOLO SI ESTÁ LOGUEADO */}
         {/*si existe muestra el boton agregar fav sino, no muestra nada*/}

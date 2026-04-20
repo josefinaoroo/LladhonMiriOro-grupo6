@@ -7,9 +7,16 @@ class Movie extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      verDescripcion: false
+      verDescripcion: false,
+      esFavorito: false
     };
   }
+
+  componentDidMount() {
+  this.setState({
+    esFavorito: this.chequearFavoritoInicial(this.props.dato.id)
+  });
+}
 
   verDescripcion() {
     this.setState({
@@ -35,12 +42,49 @@ class Movie extends Component {
     poster_path: peli.poster_path
   };
 
-  let existe = favoritos.some(fav => fav.id === peli.id);
+  let existe = favoritos.filter(fav => fav.id === peli.id);
 
-  if (!existe) {
+  if (existe.length === 0) {
     favoritos.push(objeto);
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
+
+    this.setState ({
+      esFavorito: true
+    });
+
     alert("Agregado a favoritos");
+  }
+}
+
+chequearFavoritoInicial(id) {
+  let favoritos = localStorage.getItem("favoritos");
+
+  if (favoritos === null) {
+    return false;
+  }
+
+  favoritos = JSON.parse(favoritos);
+
+  let resultado = favoritos.filter(fav => fav.id === id);
+
+  return resultado.length > 0;
+}
+
+eliminarFavorito() {
+  let favoritos = localStorage.getItem("favoritos");
+
+  if (favoritos !== null) {
+    favoritos = JSON.parse(favoritos);
+
+    let nuevos = favoritos.filter(fav => fav.id !== this.props.dato.id);
+
+    localStorage.setItem("favoritos", JSON.stringify(nuevos));
+
+    this.setState({
+      esFavorito: false
+    });
+
+    alert("Eliminado de favoritos");
   }
 }
 
@@ -76,12 +120,21 @@ class Movie extends Component {
             </Link>
 
            {cookies.get("user") && (
-  <button
-    onClick={() => this.agregarFavorito()}
-    className="btn btn-danger mt-2"
-  >
-    Agregar a favoritos
-  </button>
+            this.state.esFavorito ? (
+            <button
+              onClick={() => this.eliminarFavorito()}
+              className="btn btn-danger mt-2"
+    >
+               Eliminar de favoritos
+            </button>
+  ) : (
+             <button
+              onClick={() => this.agregarFavorito()}
+              className="btn btn-danger mt-2"
+    >
+               Agregar a favoritos
+    </button>
+  )
 )}
           </div>
         </div>
