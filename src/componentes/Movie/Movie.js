@@ -36,11 +36,11 @@ class Movie extends Component {
   let peli = this.props.dato;
 
   let objeto = {
-    id: peli.id,
-    titulo: peli.title,
-    tipo: "movie",
-    poster_path: peli.poster_path
-  };
+  id: peli.id,
+  titulo: peli.title ? peli.title : peli.name,
+  tipo: "movie",
+  poster_path: peli.poster_path
+};
 
   let existe = favoritos.filter(fav => fav.id === peli.id);
 
@@ -88,8 +88,12 @@ eliminarFavorito() {
   }
 }
 
+
 //CAMBIAR EL DETALLE COMO ESTA EN EL PROYECTO OG
   render() {
+
+    const tipo = this.props.dato.name ? "tv" : "movie";
+
     return (
       <article className="col-md-3 mb-4">
         <div className="card h-100">
@@ -100,8 +104,8 @@ eliminarFavorito() {
           />
 
           <div className="card-body">
-            <h5 className="card-title">{this.props.dato.title}</h5>
-
+          <h5 className="card-title"> {this.props.dato.title ? this.props.dato.title : this.props.dato.name}
+</h5>
             <button
               onClick={() => this.verDescripcion()}
               className="btn btn-danger"
@@ -115,10 +119,10 @@ eliminarFavorito() {
                         </p>
                 : null
         }
-            <Link to={`/detalle/${this.props.dato.id}`} className="btn btn-danger mt-2 d-block">
-              Ir a detalle
-            </Link>
 
+        <Link to={`/detalle/${tipo}/${this.props.dato.id}`} className="btn btn-danger mt-2 d-block">
+          Ir a detalle
+          </Link>
            {cookies.get("user") && (
             this.state.esFavorito ? (
             <button

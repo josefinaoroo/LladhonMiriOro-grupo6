@@ -27,7 +27,7 @@ function App() {
         <Route path="/login" component={Login}/> 
         <Route path="/favoritos" component={Favoritos}/>
         <Route path="/crearcuenta" component={CrearCuenta}/>
-        <Route path="/detalle/:id" component={Detalle} />
+        <Route path="/detalle/:tipo/:id" component={Detalle} />
         <Route component={NotFound}/>
     </Switch>
       <Footer/>

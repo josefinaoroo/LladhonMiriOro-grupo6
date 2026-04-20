@@ -17,8 +17,9 @@ class Detalle extends Component {
 
   componentDidMount() {
     let id = this.props.match.params.id;
+    let tipo = this.props.match.params.tipo;
 
-    fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=22424f1be1f9ca8ae9a2dba99019226a&language=es-ES`)
+    fetch(`https://api.themoviedb.org/3/${tipo}/${id}?api_key=22424f1be1f9ca8ae9a2dba99019226a&language=es-ES`)
       .then(res => res.json())
       .then(data => {
       
@@ -120,7 +121,7 @@ chequearFavoritoInicial(id) {
     return (
       <div className="detalle-container">
         <Header/>
-        <h1>{peli.title}</h1>
+        <h1>{peli.title ? peli.title : peli.name}</h1>
 
         <img
           src={`https://image.tmdb.org/t/p/w500${peli.poster_path}`}
@@ -128,9 +129,14 @@ chequearFavoritoInicial(id) {
         />
 
         <p><strong>Rating:</strong> {peli.vote_average}</p>
-        <p><strong>Fecha de estreno:</strong> {peli.release_date}</p>
-        <p><strong>Duración:</strong> {peli.runtime} minutos</p>
-        <p><strong>Géneros:</strong> {peli.genres.map(g => g.name).join(", ")}</p>
+        <p><strong>Fecha de estreno:</strong>{" "} {peli.release_date ? peli.release_date : peli.first_air_date}</p>
+        <p> <strong>Duración:</strong>{" "}
+        {peli.runtime ? peli.runtime + " minutos"
+        : peli.episode_run_time && peli.episode_run_time.length > 0
+        ? peli.episode_run_time[0] + " min por episodio"
+        : "No disponible"}
+        </p>
+        <p> <strong>Géneros:</strong>{" "} {peli.genres ? peli.genres.map(g => g.name).join(", ") : "Sin datos"}</p>
         <p><strong>Sinopsis:</strong> {peli.overview}</p>
 
         {cookies.get("user")  && (
