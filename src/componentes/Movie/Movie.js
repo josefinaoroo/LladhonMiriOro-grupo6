@@ -89,7 +89,7 @@ eliminarFavorito() {
 }
 
 
-//CAMBIAR EL DETALLE COMO ESTA EN EL PROYECTO OG
+
   render() {
 
     const tipo = this.props.dato.name ? "tv" : "movie";

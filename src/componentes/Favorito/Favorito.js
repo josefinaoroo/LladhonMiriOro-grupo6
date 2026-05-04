@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function FavoritoItem(props) {
-    const item = props.item; //el .item tiene toda la información de la pelúcula
-    const eliminar = props.eliminar; //eliminar --> es la función 
+    const item = props.item; 
+    const eliminar = props.eliminar; 
 
     return (
         <article className="col-md-3 mb-4">

@@ -10,20 +10,19 @@ class Search extends Component {
         };
     }
 
-    //El enviarcambios es una funcion que cuando se llama, evita el comportamiento default y ademas con el push history, me lleva la nueva pagina.
-    //El push va a llevarnos a la pagina donde este lo que se busco y guardo en el estado con la funcion controlCambios(e)
+    
     enviarCambios(e) {
         e.preventDefault();
         this.props.history.push(`/results/${this.state.tipo}/${this.state.value}`);
     }
 
-    //Esta funcion lo que hace es que agarra el value de lo que se escribe en el input y lo guarda en el state. Este valor lo toma la funcion enviarCambios para llevarnos a la nueva pagina
+   
     controlCambios(e) {
         this.setState({
             value: e.target.value
         });
     }
-    // Controlo el valor del select
+    
     controlSelect(e) {
         this.setState({ 
             tipo: e.target.value });

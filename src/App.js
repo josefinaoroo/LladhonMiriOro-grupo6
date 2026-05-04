@@ -11,8 +11,7 @@ import MoviesScreen from "./screens/MoviesScreen/MoviesScreen";
 import MoviesScreenCartelera from "./screens/MoviesCarteleraScreen/MoviesCarteleraScreen";
 import Results from "./componentes/Results/Results";
 
-//recordar login /:busqueda --> esto es para obtener la info que ingresa el usuario
-//chequear que se pone en notfound (habiamos puesto estrellita)
+
 
 function App() {
   return (

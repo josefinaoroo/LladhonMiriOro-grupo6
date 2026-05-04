@@ -38,13 +38,13 @@ class Login extends Component {
       ;
     }
 
-    // GUARDAR COOKIE
+
     cookies.set("user", this.state.email, { path: "/" });
 
-    // REDIRECCIÓN
+
     this.props.history.push("/");
 
-    // limpiar
+ 
     this.setState({
       email: "",
       password: "",

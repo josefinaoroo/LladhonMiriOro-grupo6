@@ -157,8 +157,6 @@ chequearFavoritoInicial(id) {
   )
 )}
 
-        {/* SOLO SI ESTÁ LOGUEADO */}
-        {/*si existe muestra el boton agregar fav sino, no muestra nada*/}
         
       </div>
     );
