@@ -12,6 +12,12 @@ class Movie extends Component {
     };
   }
 
+  componentDidMount() {
+  this.setState({
+    esFavorito: this.chequearFavoritoInicial(this.props.dato.id)
+  });
+}
+
   verDescripcion() {
     this.setState({
       verDescripcion: !this.state.verDescripcion
@@ -37,6 +43,7 @@ class Movie extends Component {
     let encontrados = favoritos.filter(fav=> fav.id === this.props.dato.id);
     let existe = encontrados.length > 0;
 
+<<<<<<< HEAD
     favoritos.push(objeto);
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
     this.setState({ esFavorito: true });
@@ -52,10 +59,66 @@ class Movie extends Component {
     favoritos = favoritos.filter(fav => fav.id !== this.props.dato.id);
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
     this.setState({esFavorito: false})
+=======
+  let objeto = {
+  id: peli.id,
+  titulo: peli.title ? peli.title : peli.name,
+  tipo: "movie",
+  poster_path: peli.poster_path
+};
+
+  let existe = favoritos.filter(fav => fav.id === peli.id);
+
+  if (existe.length === 0) {
+    favoritos.push(objeto);
+    localStorage.setItem("favoritos", JSON.stringify(favoritos));
+
+    this.setState ({
+      esFavorito: true
+    });
+
+    alert("Agregado a favoritos");
+>>>>>>> 9ff7f0c4228a2c5f3c92f550676cee659fbfbb59
   }
 
-//CAMBIAR EL DETALLE COMO ESTA EN EL PROYECTO OG
+chequearFavoritoInicial(id) {
+  let favoritos = localStorage.getItem("favoritos");
+
+  if (favoritos === null) {
+    return false;
+  }
+
+  favoritos = JSON.parse(favoritos);
+
+  let resultado = favoritos.filter(fav => fav.id === id);
+
+  return resultado.length > 0;
+}
+
+eliminarFavorito() {
+  let favoritos = localStorage.getItem("favoritos");
+
+  if (favoritos !== null) {
+    favoritos = JSON.parse(favoritos);
+
+    let nuevos = favoritos.filter(fav => fav.id !== this.props.dato.id);
+
+    localStorage.setItem("favoritos", JSON.stringify(nuevos));
+
+    this.setState({
+      esFavorito: false
+    });
+
+    alert("Eliminado de favoritos");
+  }
+}
+
+
+
   render() {
+
+    const tipo = this.props.dato.name ? "tv" : "movie";
+
     return (
       <article className="col-md-3 mb-4">
         <div className="card h-100">
@@ -66,8 +129,8 @@ class Movie extends Component {
           />
 
           <div className="card-body">
-            <h5 className="card-title">{this.props.dato.title}</h5>
-
+          <h5 className="card-title"> {this.props.dato.title ? this.props.dato.title : this.props.dato.name}
+</h5>
             <button
               onClick={() => this.verDescripcion()}
               className="btn btn-danger"
@@ -81,17 +144,35 @@ class Movie extends Component {
                         </p>
                 : null
         }
-            <Link to={`/detalle/${this.props.dato.id}`} className="btn btn-danger mt-2 d-block">
-              Ir a detalle
-            </Link>
 
+        <Link to={`/detalle/${tipo}/${this.props.dato.id}`} className="btn btn-danger mt-2 d-block">
+          Ir a detalle
+          </Link>
            {cookies.get("user") && (
+<<<<<<< HEAD
   <button
     onClick={() => this.setState.esFavorito ? this.eliminarFavorito() : this.agregarFavorito()}
     className="btn btn-danger mt-2"
   >
     {this.setState.esFavorito ? "Eliminar de favoritos" : "Agregar a favoritos"}
   </button>
+=======
+            this.state.esFavorito ? (
+            <button
+              onClick={() => this.eliminarFavorito()}
+              className="btn btn-danger mt-2"
+    >
+               Eliminar de favoritos
+            </button>
+  ) : (
+             <button
+              onClick={() => this.agregarFavorito()}
+              className="btn btn-danger mt-2"
+    >
+               Agregar a favoritos
+    </button>
+  )
+>>>>>>> 9ff7f0c4228a2c5f3c92f550676cee659fbfbb59
 )}
           </div>
         </div>
