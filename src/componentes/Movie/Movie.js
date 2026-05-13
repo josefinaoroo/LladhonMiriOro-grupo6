@@ -7,7 +7,8 @@ class Movie extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      verDescripcion: false
+      verDescripcion: false,
+      esFavorito: false
     };
   }
 
@@ -16,33 +17,42 @@ class Movie extends Component {
       verDescripcion: !this.state.verDescripcion
     });
   }
+   agregarFavorito() {
+    let favoritos = localStorage.getItem("favoritos");
 
-  agregarFavorito() {
-  let favoritos = localStorage.getItem("favoritos");
+    if (favoritos === null) {
+      favoritos = [];
+    } else {
+      favoritos = JSON.parse(favoritos);
+    }
 
-  if (favoritos === null) {
-    favoritos = [];
-  } else {
-    favoritos = JSON.parse(favoritos);
-  }
+    let peli = this.props.dato;
 
-  let peli = this.props.dato;
+    let objeto = {
+      id: peli.id,
+      titulo: peli.title,
+      tipo: "movie",
+      poster_path: peli.poster_path
+    };
+    let encontrados = favoritos.filter(fav=> fav.id === this.props.dato.id);
+    let existe = encontrados.length > 0;
 
-  let objeto = {
-    id: peli.id,
-    titulo: peli.title,
-    tipo: "movie",
-    poster_path: peli.poster_path
-  };
-
-  let existe = favoritos.some(fav => fav.id === peli.id);
-
-  if (!existe) {
     favoritos.push(objeto);
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
-    alert("Agregado a favoritos");
+    this.setState({ esFavorito: true });
   }
-}
+  eliminarFavorito(){
+    let favoritos = localStorage.getItem("favoritos");
+
+    if (favoritos === null){
+      favoritos = [];
+    } else {
+      favoritos = JSON.parse(favoritos);
+    }
+    favoritos = favoritos.filter(fav => fav.id !== this.props.dato.id);
+    localStorage.setItem("favoritos", JSON.stringify(favoritos));
+    this.setState({esFavorito: false})
+  }
 
 //CAMBIAR EL DETALLE COMO ESTA EN EL PROYECTO OG
   render() {
@@ -77,10 +87,10 @@ class Movie extends Component {
 
            {cookies.get("user") && (
   <button
-    onClick={() => this.agregarFavorito()}
+    onClick={() => this.setState.esFavorito ? this.eliminarFavorito() : this.agregarFavorito()}
     className="btn btn-danger mt-2"
   >
-    Agregar a favoritos
+    {this.setState.esFavorito ? "Eliminar de favoritos" : "Agregar a favoritos"}
   </button>
 )}
           </div>
@@ -89,5 +99,4 @@ class Movie extends Component {
     );
   }
 }
-
 export default Movie;

@@ -1,20 +1,15 @@
-import React, { Component } from "react";
+import { useState } from "react";
 import Cookies from "universal-cookie";
 import Header from "../../componentes/Header/Header";
 
 const cookies = new Cookies();
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      password: "",
-      error: ""
-    };
-  }
+function Login(props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  iniciarSesion(e) {
+  function iniciarSesion(e) {
     e.preventDefault();
 
     let usuarios = localStorage.getItem("usuarios");
@@ -25,60 +20,61 @@ class Login extends Component {
       usuarios = [];
     }
 
-    let usuarioCorrecto = usuarios.filter(usuario =>
-      usuario.email === this.state.email &&
-      usuario.password === this.state.password
+    let usuarioCorrecto = usuarios.filter(
+      usuario => usuario.email === email && usuario.password === password
     );
 
     if (usuarioCorrecto.length === 0) {
-      this.setState({
-        error: "Credenciales incorrectas"
-      });
+      setError("Credenciales incorrectas");
       return;
-      ;
     }
 
-    // GUARDAR COOKIE
-    cookies.set("user", this.state.email, { path: "/" });
+    cookies.set("user", email, { path: "/" });
 
-    // REDIRECCIÓN
-    this.props.history.push("/");
+    setEmail("");
+    setPassword("");
+    setError("");
 
-    // limpiar
-    this.setState({
-      email: "",
-      password: "",
-      error: ""
-    });
+    props.history.push("/");
   }
 
-  render() {
-    return (
-        <>
-        <Header/>
-          <h2 class="alert alert-danger">Iniciar sesión</h2>
-        <div className= "row justify-content-center">
-            <div class="col-md-6">
-                 <form onSubmit={(e) => this.iniciarSesion(e)}>
-                    <div className="form-group">
-                        <input type="email" placeholder="Email" className="form-control" value={this.state.email} 
-                        onChange={(e) => this.setState({ email: e.target.value })}/>
+  return (
+    <>
+      <Header />
+      <h2 className="alert alert-danger">Iniciar sesión</h2>
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <form onSubmit={(e) => iniciarSesion(e)}>
+            <div className="form-group">
+              <input
+                type="email"
+                placeholder="Email"
+                className="form-control"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div>
-                <input type="password" placeholder="Password" className= "form-control"value={this.state.password}
-                 onChange={(e) => this.setState({ password: e.target.value })}/>
+              <input
+                type="password"
+                placeholder="Password"
+                className="form-control"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
-
-         <button type="submit" className="btn btn-danger btn-block">Ingresar</button>
-         <p class="mt-3 text-center">¿No tenés cuenta? <a href="/crearcuenta">Registrarse</a></p>
-        {this.state.error !== "" ? <p>{this.state.error}</p> : null}
-      </form>
-            </div>
+            <button type="submit" className="btn btn-danger btn-block">
+              Ingresar
+            </button>
+            <p className="mt-3 text-center">
+              ¿No tenés cuenta? <a href="/crearcuenta">Registrarse</a>
+            </p>
+            {error !== "" ? <p>{error}</p> : null}
+          </form>
         </div>
-        
-        </>
-    )
-  }
+      </div>
+    </>
+  );
 }
 
 export default Login;
