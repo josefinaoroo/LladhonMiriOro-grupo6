@@ -1,31 +1,23 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import MoviesHome from "../../componentes/MoviesHome/MoviesHome";
 import NowPlaying from "../../componentes/NowPlaying/NowPlaying";
 import Header from "../../componentes/Header/Header";
 import Search from "../Search/Search";
 
-class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      valor: ""
-    };
-  }
+function Home (props){
+  const [valor, setvalor] = useState ("")
 
-  enviarBusqueda(event) {
+  function enviarBusqueda(event) {
   event.preventDefault();
 
-  this.props.history.push(`/results/movie/${this.state.valor}`);
+  props.history.push(`/results/movie/${valor}`);
 }
   
 
-  controlarCambios(event) {
-    this.setState({
-      valor: event.target.value
-    });
+  function controlarCambios(event) {
+    setvalor(event.target.value)
   }
-
-  render() {
+  
     return (
       <>
       <Header/>
@@ -37,6 +29,6 @@ class Home extends Component {
       </>
     );
   }
-}
+
 
 export default Home;
